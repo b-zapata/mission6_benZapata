@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Movie Added";
+}
+<h1>@ViewData["Title"]</h1>
+
+@model Movie
+
+<h2>Movie @Model.Title added!</h2>
+<br /><br />
+<button onclick="redirectToAddMovie()">Add another movie</button>
+
+<script>
+    function redirectToAddMovie() {
+        window.location.href = '/Home/AddMovie';
+    }
+</script>
