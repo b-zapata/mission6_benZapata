@@ -11,8 +11,8 @@ using mission6_benZapata.Models;
 namespace mission6_benZapata.Migrations
 {
     [DbContext(typeof(AddMovieContext))]
-    [Migration("20240224055258_TakeOne")]
-    partial class TakeOne
+    [Migration("20240224085148_TakeFive")]
+    partial class TakeFive
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,8 @@ namespace mission6_benZapata.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CopiedToPlex")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("CopiedToPlex")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .HasColumnType("TEXT");

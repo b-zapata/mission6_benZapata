@@ -7,8 +7,9 @@
 
 
 <form method="post">
-    <label asp-for="Category">Category:</label><br>
-    <select asp-for="Category" required>
+    <input type="hidden" asp-for="MovieId" />
+    <label asp-for="CategoryId">Category:</label><br>
+    <select asp-for="CategoryId" required>
         <option value="">Select a Category</option>
         @foreach (Category cat in ViewBag.Categories)
         {
@@ -18,20 +19,22 @@
     <label asp-for="Title">Title:</label><br>
     <input asp-for="Title" required /><br>
     <label asp-for="Year">Year:</label><br>
-    <input asp-for="Year" required /><br>
+    <input asp-for="Year" min="1888" required /><br>
     <label asp-for="Director">Director:</label><br>
-    <input asp-for="Director" required /><br>
+    <input asp-for="Director"/><br>
     <label asp-for="Rating">Rating: </label><br />
-    <select asp-for="Rating" required>
+    <select asp-for="Rating">
         <option value="G">G</option>
         <option value="PG">PG</option>
         <option value="PG-13">PG-13</option>
         <option value="R">R</option>
     </select><br />
     <label asp-for="Edited">Edited:</label><br>
-    <input asp-for="Edited" type="checkbox" /><br>
+    <input asp-for="Edited" type="checkbox" required/><br>
     <label asp-for="LentTo">Lent To:</label><br>
     <input asp-for="LentTo" /><br>
+    <label asp-for="CopiedToPlex">Copied to Plex:</label><br>
+    <input asp-for="CopiedToPlex" type="checkbox" required/><br>
     <label asp-for="Notes">Notes (25 characters max):</label><br>
     <textarea asp-for="Notes" rows="4" cols="50" maxlength="25"></textarea><br><br>
     <input type="submit" value="Submit">

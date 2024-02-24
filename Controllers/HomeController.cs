@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using mission6_benZapata.Models;
 using System.Diagnostics;
 
@@ -25,6 +26,25 @@ namespace mission6_benZapata.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult AddMovie()
+        {
+            Movie newMovie = new Movie();
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryId)
+                .ToList();
+
+            return View(newMovie);
+        }
+
+        [HttpPost]
+        public IActionResult AddMovie(Movie response)
+        {
+            _context.Movies.Add(response);
+            _context.SaveChanges();
+            return View("MovieAddedConfirmation", response);
+        }
         public IActionResult SeeMovies()
         {
             //Linq
@@ -47,22 +67,30 @@ namespace mission6_benZapata.Controllers
             return View("AddMovie", movieToEdit);
         }
 
-        [HttpGet]
-        public IActionResult AddMovie()
+        [HttpPost]
+        public IActionResult EditMovie(Movie updatedInfo)
         {
-            ViewBag.Category = _context.Categories
-                .OrderBy(x => x.CategoryId)
-                .ToList();
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
 
-            return View();
+            return RedirectToAction("SeeMovies");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteMovie(int MovieId)
+        {
+            var movieToDelete = _context.Movies
+                .Single(x => x.MovieId == MovieId);
+            return View("ConfirmDelete", movieToDelete);
         }
 
         [HttpPost]
-        public IActionResult AddMovie(Movie response)
+        public IActionResult DeleteMovie(Movie movieToDelete)
         {
-            _context.Movies.Add(response);
+            _context.Movies.Remove(movieToDelete);
             _context.SaveChanges();
-            return View("MovieAddedConfirmation", response);
+
+            return RedirectToAction("SeeMovies");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

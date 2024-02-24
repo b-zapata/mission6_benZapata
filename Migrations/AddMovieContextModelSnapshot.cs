@@ -41,9 +41,8 @@ namespace mission6_benZapata.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CopiedToPlex")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("CopiedToPlex")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .HasColumnType("TEXT");

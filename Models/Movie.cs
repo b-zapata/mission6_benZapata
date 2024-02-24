@@ -11,9 +11,9 @@ namespace mission6_benZapata.Models
         public int MovieId { get; set; }
 
         [ForeignKey("CategoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         public string Title { get; set; }
 
@@ -27,7 +27,7 @@ namespace mission6_benZapata.Models
 
         public string? LentTo { get; set; }
 
-        public string CopiedToPlex { get; set; }
+        public bool CopiedToPlex { get; set; }
 
         public string? Notes { get; set; }
 
