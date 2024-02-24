@@ -10,8 +10,6 @@ namespace mission6_benZapata.Controllers
 
         private AddMovieContext _context;
 
-
-
         public HomeController(AddMovieContext temp)
         {
             _context = temp;
@@ -27,10 +25,35 @@ namespace mission6_benZapata.Controllers
         {
             return View();
         }
+        public IActionResult SeeMovies()
+        {
+            //Linq
+            var movies = _context.Movies
+                .OrderBy(x => x.MovieId)
+                .ToList();
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult EditMovie(int MovieId)
+        {
+            var movieToEdit = _context.Movies
+                .Single(x => x.MovieId == MovieId);
+
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryId)
+                .ToList();
+
+            return View("AddMovie", movieToEdit);
+        }
 
         [HttpGet]
         public IActionResult AddMovie()
         {
+            ViewBag.Category = _context.Categories
+                .OrderBy(x => x.CategoryId)
+                .ToList();
+
             return View();
         }
 
@@ -47,5 +70,6 @@ namespace mission6_benZapata.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
